@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <component id="n1_lvs1" name="LoginBtn" src="lvs12" fileName="LoginBtn.xml" xy="510,354" size="192,37">
+      <relation target="n1_lvs1" sidePair="center-center,middle-middle"/>
+      <Button title="登录"/>
+    </component>
+    <graph id="n5_lvs1" name="n5" xy="511,294" size="191,39" type="rect"/>
+    <text id="n2_lvs1" name="AccountInput" xy="511,294" size="191,39" input="true" prompt="请在这里输入帐号" restrict="20" fontSize="12" vAlign="middle" autoSize="none" text=""/>
+  </displayList>
+</component>

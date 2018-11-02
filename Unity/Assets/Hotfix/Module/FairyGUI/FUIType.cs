@@ -1,4 +1,4 @@
-﻿namespace ETModel
+﻿namespace ETHotfix
 {
     public static class FUIType
     {

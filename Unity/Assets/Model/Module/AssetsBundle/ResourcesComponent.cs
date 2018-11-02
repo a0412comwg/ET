@@ -90,7 +90,7 @@ namespace ETModel
 				return result;
 			}
 
-			result = value + ".unity3d";
+			result = value.ToLower() + ".unity3d";
 			StringToABDict[value] = result;
 			return result;
 		}
@@ -211,6 +211,16 @@ namespace ETModel
 			}
 
 			return resource;
+		}
+
+		public AssetBundle GetAssetBundle(string abName)
+		{
+			ABInfo abInfo;
+			if (!this.bundles.TryGetValue(abName, out abInfo))
+			{
+				throw new Exception($"not found bundle: {abName}");
+			}
+			return abInfo.AssetBundle;
 		}
 
 		public void UnloadBundle(string assetBundleName)
