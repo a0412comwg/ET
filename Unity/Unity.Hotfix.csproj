@@ -9,8 +9,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{1066F652-6A89-D1C4-9881-1A19DF7AB80E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -82,6 +81,7 @@
     <Compile Include="Assets\Hotfix\Entity\Config\UnitConfig.cs" />
     <Compile Include="Assets\Hotfix\Entity\Game.cs" />
     <Compile Include="Assets\Hotfix\Entity\Scene.cs" />
+    <Compile Include="Assets\Hotfix\FUI\FUIType.cs" />
     <Compile Include="Assets\Hotfix\FUI\UILogin\Component\FUILoginComponent.cs" />
     <Compile Include="Assets\Hotfix\FUI\UILogin\System\FUILoginComponentSystem.cs" />
     <Compile Include="Assets\Hotfix\FUI\UILogin\System\FUILoginFactory.cs" />
@@ -102,7 +102,6 @@
     <Compile Include="Assets\Hotfix\Module\FairyGUI\FUI.cs" />
     <Compile Include="Assets\Hotfix\Module\FairyGUI\FUIComponent.cs" />
     <Compile Include="Assets\Hotfix\Module\FairyGUI\FUIStackComponent.cs" />
-    <Compile Include="Assets\Hotfix\Module\FairyGUI\FUIType.cs" />
     <Compile Include="Assets\Hotfix\Module\FairyGUI\IFUIFactory.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\AMHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\HotfixMessage.cs" />

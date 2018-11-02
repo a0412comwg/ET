@@ -34,7 +34,7 @@ namespace ETModel
 		public void Pop()
 		{
 			FUI fui = this.uis.Pop();
-			Game.Scene.GetComponent<FUIComponent>().Remove(fui.Type);
+			fui.Dispose();
 			if (this.uis.Count > 0)
 			{
 				this.uis.Peek().Visible = true;
@@ -43,7 +43,11 @@ namespace ETModel
 
 		public void Clear()
 		{
-			
+			while (this.uis.Count > 0)
+			{
+				FUI fui = this.uis.Pop();
+				fui.Dispose();
+			}
 		}
 	}
 }

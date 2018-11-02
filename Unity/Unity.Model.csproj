@@ -9,8 +9,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{B4BF9894-F5D9-41C4-13E3-3F26F7700E29}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -295,7 +294,6 @@
     <Compile Include="Assets\Model\Module\FairyGUI\FUIFactoryAttribute.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\FUIHelper.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\FUIPackageComponent.cs" />
-    <Compile Include="Assets\Model\Module\FairyGUI\FUIType.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\FUIStackComponent.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\GWindow.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\IFUIFactory.cs" />

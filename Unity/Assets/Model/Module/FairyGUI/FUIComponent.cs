@@ -14,7 +14,7 @@ namespace ETModel
 	}
 
 	/// <summary>
-	/// 管理所有顶层UI
+	/// 管理所有顶层UI, 顶层UI都是GRoot的孩子
 	/// </summary>
 	public class FUIComponent: Component
 	{
@@ -38,7 +38,7 @@ namespace ETModel
 
 		public void Awake()
 		{
-			this.Root = ComponentFactory.Create<FUI, string, GObject>(FUIType.Root, GRoot.inst);
+			this.Root = ComponentFactory.Create<FUI, string, GObject>("Root", GRoot.inst);
 			
 			this.uiTypes.Clear();
             
@@ -73,24 +73,13 @@ namespace ETModel
 		{
 			try
 			{
-				FUI ui = await this.uiTypes[type].Create(type);
-				this.Root.Add(ui);
+				FUI ui = await this.uiTypes[type].Create();
 				return ui;
 			}
 			catch (Exception e)
 			{
 				throw new Exception($"{type} UI 错误: {e}");
 			}
-		}
-
-		public void Remove(string type)
-		{
-			this.Root.Remove(type);
-		}
-
-		public FUI Get(string type)
-		{
-			return this.Root.Get(type);
 		}
 	}
 }

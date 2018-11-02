@@ -26,7 +26,7 @@ namespace ETHotfix
 		public void Pop()
 		{
 			FUI fui = this.uis.Pop();
-			Game.Scene.GetComponent<FUIComponent>().Remove(fui.Type);
+			fui.Dispose();
 			if (this.uis.Count > 0)
 			{
 				this.uis.Peek().Visible = true;

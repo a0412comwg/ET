@@ -21,7 +21,7 @@ namespace ETHotfix
 	{
 		private readonly Dictionary<string, IFUIFactory> uiTypes = new Dictionary<string, IFUIFactory>();
 
-		private FUI Root;
+		public FUI Root;
 
 		public override void Dispose()
 		{
@@ -39,7 +39,7 @@ namespace ETHotfix
 
 		public void Awake()
 		{
-			this.Root = ComponentFactory.Create<FUI, string, GObject>(FUIType.Root, GRoot.inst);
+			this.Root = ComponentFactory.Create<FUI, string, GObject>("Root", GRoot.inst);
 			
 			this.uiTypes.Clear();
             
@@ -74,24 +74,13 @@ namespace ETHotfix
 		{
 			try
 			{
-				FUI ui = await this.uiTypes[type].Create(type);
-				this.Root.Add(ui);
+				FUI ui = await this.uiTypes[type].Create();
 				return ui;
 			}
 			catch (Exception e)
 			{
 				throw new Exception($"{type} UI 错误: {e}");
 			}
-		}
-
-		public void Remove(string type)
-		{
-			this.Root.Remove(type);
-		}
-
-		public FUI Get(string type)
-		{
-			return this.Root.Get(type);
 		}
 	}
 }
