@@ -12,7 +12,7 @@ namespace ETHotfix
 
 		public async ETVoid RunAsync()
 		{
-			await Game.Scene.GetComponent<FUIComponent>().Create(FUIType.FUILogin);
+			await Game.Scene.GetComponent<FUIComponent>().Create(FUIType.Login);
 		}
 	}
 }

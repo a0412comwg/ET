@@ -1,5 +1,5 @@
 {
-	"binaryFormat":false,
+	"binaryFormat":true,
 	"codeGeneration":{
 		"classNamePrefix":"UI_",
 		"codePath":"",
@@ -12,5 +12,5 @@
 	"compressDesc":true,
 	"fileExtension":"",
 	"packageCount":2,
-	"path":"D:\\Source\\ET\\Unity\\Assets\\FairyGUI"
+	"path":"D:\\Source\\ET\\Unity\\Assets\\Res\\FairyGUI\\"
 }

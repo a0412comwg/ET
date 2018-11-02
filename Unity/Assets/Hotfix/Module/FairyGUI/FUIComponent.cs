@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ETModel;
+using FairyGUI;
 
 namespace ETHotfix
 {
@@ -14,22 +14,14 @@ namespace ETHotfix
 		}
 	}
 
-	[ObjectSystem]
-	public class FUIComponentLoadSystem : LoadSystem<FUIComponent>
-	{
-		public override void Load(FUIComponent self)
-		{
-			self.Load();
-		}
-	}
-
 	/// <summary>
-	/// 管理所有UI
+	/// 管理所有顶层UI, 顶层UI都是GRoot的孩子
 	/// </summary>
 	public class FUIComponent: Component
 	{
-		private readonly Dictionary<string, IFUIFactory> UiTypes = new Dictionary<string, IFUIFactory>();
-		private readonly Dictionary<string, FUI> uis = new Dictionary<string, FUI>();
+		private readonly Dictionary<string, IFUIFactory> uiTypes = new Dictionary<string, IFUIFactory>();
+
+		private FUI Root;
 
 		public override void Dispose()
 		{
@@ -40,29 +32,16 @@ namespace ETHotfix
 
 			base.Dispose();
 
-			foreach (string type in uis.Keys.ToArray())
-			{
-				FUI ui;
-				if (!uis.TryGetValue(type, out ui))
-				{
-					continue;
-				}
-				uis.Remove(type);
-				ui.Dispose();
-			}
-
-			this.uis.Clear();
-			this.UiTypes.Clear();
+			this.uiTypes.Clear();
+			
+			this.Root.RemoveChildren();
 		}
 
 		public void Awake()
 		{
-			this.Load();
-		}
-
-		public void Load()
-		{
-			this.UiTypes.Clear();
+			this.Root = ComponentFactory.Create<FUI, string, GObject>(FUIType.Root, GRoot.inst);
+			
+			this.uiTypes.Clear();
             
 			List<Type> types = Game.EventSystem.GetTypes();
 
@@ -75,7 +54,7 @@ namespace ETHotfix
 				}
 
 				FUIFactoryAttribute attribute = attrs[0] as FUIFactoryAttribute;
-				if (UiTypes.ContainsKey(attribute.Type))
+				if (this.uiTypes.ContainsKey(attribute.Type))
 				{
                     Log.Debug($"已经存在同类FUI Factory: {attribute.Type}");
 					throw new Exception($"已经存在同类FUI Factory: {attribute.Type}");
@@ -87,7 +66,7 @@ namespace ETHotfix
 					Log.Error($"{o.GetType().FullName} 没有继承 IFUIFactory");
 					continue;
 				}
-				this.UiTypes.Add(attribute.Type, factory);
+				this.uiTypes.Add(attribute.Type, factory);
 			}
 		}
 
@@ -95,8 +74,8 @@ namespace ETHotfix
 		{
 			try
 			{
-				FUI ui = await UiTypes[type].Create(type);
-				uis.Add(type, ui);
+				FUI ui = await this.uiTypes[type].Create(type);
+				this.Root.Add(ui);
 				return ui;
 			}
 			catch (Exception e)
@@ -105,46 +84,14 @@ namespace ETHotfix
 			}
 		}
 
-		public void Add(string type, FUI ui)
-		{
-			this.uis.Add(type, ui);
-		}
-
 		public void Remove(string type)
 		{
-			FUI ui;
-			if (!uis.TryGetValue(type, out ui))
-			{
-				return;
-			}
-            uis.Remove(type);
-			ui.Dispose();
-		}
-
-		public void RemoveAll()
-		{
-			foreach (string type in this.uis.Keys.ToArray())
-			{
-				FUI ui;
-				if (!this.uis.TryGetValue(type, out ui))
-				{
-					continue;
-                }
-                this.uis.Remove(type);
-				ui.Dispose();
-			}
+			this.Root.Remove(type);
 		}
 
 		public FUI Get(string type)
 		{
-			FUI ui;
-			this.uis.TryGetValue(type, out ui);
-			return ui;
-		}
-
-		public List<string> GetUITypeList()
-		{
-			return new List<string>(this.uis.Keys);
+			return this.Root.Get(type);
 		}
 	}
 }

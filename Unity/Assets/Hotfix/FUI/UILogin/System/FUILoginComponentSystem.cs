@@ -1,5 +1,4 @@
 using ETModel;
-using FairyGUI;
 
 namespace ETHotfix
 {
@@ -8,29 +7,26 @@ namespace ETHotfix
     {
         public override void Awake(FUILoginComponent self)
         {
-            GComponent loginComponent = self.GetParent<FUI>().GObject as GComponent;
+            FUI login = self.GetParent<FUI>();
+
+            self.AccountInput = login.Get("AccountInput");
             
-            self.LoginBtn = loginComponent.GetChild("LoginBtn") as GButton;
-            self.AccountInput = loginComponent.GetChild("AccountInput") as GTextInput;
-            
-            self.LoginBtn.onClick.Add(() => LoginBtnOnClick(self));
+            login.Get("LoginBtn").GObject.asButton.onClick.Add(() => LoginBtnOnClick(self));
         }
 
         public static void LoginBtnOnClick(FUILoginComponent self)
         {
-            LoginBtnOnClickAsync(self).NoAwait();
+            LoginBtnOnClickAsync(self.AccountInput.GObject.asTextInput.text).NoAwait();
         }
 
-        public static async ETVoid LoginBtnOnClickAsync(FUILoginComponent self)
+        public static async ETVoid LoginBtnOnClickAsync(string account)
         {
-            string text = self.AccountInput.text;
-
             // 创建一个ETModel层的Session
             ETModel.Session session = ETModel.Game.Scene.GetComponent<NetOuterComponent>().Create(GlobalConfigComponent.Instance.GlobalProto.Address);
 				
             // 创建一个ETHotfix层的Session, ETHotfix的Session会通过ETModel层的Session发送消息
             Session realmSession = ComponentFactory.Create<Session, ETModel.Session>(session);
-            R2C_Login r2CLogin = (R2C_Login) await realmSession.Call(new C2R_Login() { Account = text, Password = "111111" });
+            R2C_Login r2CLogin = (R2C_Login) await realmSession.Call(new C2R_Login() { Account = account, Password = "111111" });
             realmSession.Dispose();
 
             // 创建一个ETModel层的Session,并且保存到ETModel.SessionComponent中

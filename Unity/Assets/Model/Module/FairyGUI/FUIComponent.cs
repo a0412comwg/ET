@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using FairyGUI;
 
 namespace ETModel
 {
@@ -13,22 +13,14 @@ namespace ETModel
 		}
 	}
 
-	[ObjectSystem]
-	public class FUIComponentLoadSystem : LoadSystem<FUIComponent>
-	{
-		public override void Load(FUIComponent self)
-		{
-			self.Load();
-		}
-	}
-
 	/// <summary>
-	/// 管理所有UI
+	/// 管理所有顶层UI
 	/// </summary>
 	public class FUIComponent: Component
 	{
-		private readonly Dictionary<string, IFUIFactory> UiTypes = new Dictionary<string, IFUIFactory>();
-		private readonly Dictionary<string, FUI> uis = new Dictionary<string, FUI>();
+		private readonly Dictionary<string, IFUIFactory> uiTypes = new Dictionary<string, IFUIFactory>();
+
+		private FUI Root;
 
 		public override void Dispose()
 		{
@@ -39,31 +31,18 @@ namespace ETModel
 
 			base.Dispose();
 
-			foreach (string type in uis.Keys.ToArray())
-			{
-				FUI ui;
-				if (!uis.TryGetValue(type, out ui))
-				{
-					continue;
-				}
-				uis.Remove(type);
-				ui.Dispose();
-			}
-
-			this.uis.Clear();
-			this.UiTypes.Clear();
+			this.uiTypes.Clear();
+			
+			this.Root.RemoveChildren();
 		}
 
 		public void Awake()
 		{
-			this.Load();
-		}
-
-		public void Load()
-		{
-			this.UiTypes.Clear();
+			this.Root = ComponentFactory.Create<FUI, string, GObject>(FUIType.Root, GRoot.inst);
+			
+			this.uiTypes.Clear();
             
-			List<Type> types = Game.EventSystem.GetTypes(typeof(FUIFactoryAttribute));
+			List<Type> types = Game.EventSystem.GetTypes(typeof (FUIFactoryAttribute));
 
 			foreach (Type type in types)
 			{
@@ -74,9 +53,9 @@ namespace ETModel
 				}
 
 				FUIFactoryAttribute attribute = attrs[0] as FUIFactoryAttribute;
-				if (UiTypes.ContainsKey(attribute.Type))
+				if (this.uiTypes.ContainsKey(attribute.Type))
 				{
-                    Log.Debug($"已经存在同类FUI Factory: {attribute.Type}");
+					Log.Debug($"已经存在同类FUI Factory: {attribute.Type}");
 					throw new Exception($"已经存在同类FUI Factory: {attribute.Type}");
 				}
 				object o = Activator.CreateInstance(type);
@@ -86,16 +65,16 @@ namespace ETModel
 					Log.Error($"{o.GetType().FullName} 没有继承 IFUIFactory");
 					continue;
 				}
-				this.UiTypes.Add(attribute.Type, factory);
+				this.uiTypes.Add(attribute.Type, factory);
 			}
 		}
 
-		public FUI Create(string type)
+		public async ETTask<FUI> Create(string type)
 		{
 			try
 			{
-				FUI ui = UiTypes[type].Create(type);
-				uis.Add(type, ui);
+				FUI ui = await this.uiTypes[type].Create(type);
+				this.Root.Add(ui);
 				return ui;
 			}
 			catch (Exception e)
@@ -104,46 +83,14 @@ namespace ETModel
 			}
 		}
 
-		public void Add(string type, FUI ui)
-		{
-			this.uis.Add(type, ui);
-		}
-
 		public void Remove(string type)
 		{
-			FUI ui;
-			if (!uis.TryGetValue(type, out ui))
-			{
-				return;
-			}
-            uis.Remove(type);
-			ui.Dispose();
-		}
-
-		public void RemoveAll()
-		{
-			foreach (string type in this.uis.Keys.ToArray())
-			{
-				FUI ui;
-				if (!this.uis.TryGetValue(type, out ui))
-				{
-					continue;
-                }
-                this.uis.Remove(type);
-				ui.Dispose();
-			}
+			this.Root.Remove(type);
 		}
 
 		public FUI Get(string type)
 		{
-			FUI ui;
-			this.uis.TryGetValue(type, out ui);
-			return ui;
-		}
-
-		public List<string> GetUITypeList()
-		{
-			return new List<string>(this.uis.Keys);
+			return this.Root.Get(type);
 		}
 	}
 }

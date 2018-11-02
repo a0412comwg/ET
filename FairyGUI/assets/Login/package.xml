@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="j54k19pc" jpegQuality="80" compressPNG="true">
   <resources>
-    <component id="lvs10" name="LoginComponent.xml" path="/" exported="true"/>
+    <component id="lvs10" name="Login.xml" path="/" exported="true"/>
     <component id="lvs12" name="LoginBtn.xml" path="/" exported="true"/>
     <component id="lvs13" name="Label.xml" path="/" exported="true"/>
   </resources>

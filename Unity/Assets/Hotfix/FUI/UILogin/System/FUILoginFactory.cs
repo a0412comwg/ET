@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
 using ETModel;
 using FairyGUI;
-using UnityEngine;
 
 namespace ETHotfix
 {
-    [FUIFactory(FUIType.FUILogin)]
+    [FUIFactory(FUIType.Login)]
     public class FUILoginFactory : IFUIFactory
     {
         public async ETTask<FUI> Create(string type)
@@ -13,12 +12,12 @@ namespace ETHotfix
 	        await Task.CompletedTask;
 	        
 	        // 可以同步或者异步加载,异步加载需要搞个转圈圈,这里为了简单使用同步加载
-	        ResourcesComponent resourcesComponent = ETModel.Game.Scene.GetComponent<ResourcesComponent>();
-	        resourcesComponent.LoadBundle(type.StringToAB());
+	        // await ETModel.Game.Scene.GetComponent<FUIPackageComponent>().AddPackageAsync(type);
+	        ETModel.Game.Scene.GetComponent<FUIPackageComponent>().AddPackage(type);
 	        
-	        AssetBundle assetBundle = resourcesComponent.GetAssetBundle(type.StringToAB());
-	        UIPackage.AddPackage(assetBundle);
-	        FUI fui = ComponentFactory.Create<FUI, GObject>(UIPackage.CreateObject("Login", "LoginComponent"));
+	        FUI fui = ComponentFactory.Create<FUI, string, GObject>(type, UIPackage.CreateObject("Login", "Login"));
+	        
+	        // 这里可以根据UI逻辑的复杂度关联性，拆分成多个小组件来写逻辑,这里逻辑比较简单就只使用一个组件了
 	        fui.AddComponent<FUILoginComponent>();
 	        
 	        return fui;
@@ -26,6 +25,7 @@ namespace ETHotfix
 
 	    public void Remove(string type)
 	    {
+		    ETModel.Game.Scene.GetComponent<FUIPackageComponent>().RemovePackage(type);
 	    }
     }
 }

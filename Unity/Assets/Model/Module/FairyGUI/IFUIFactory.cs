@@ -2,7 +2,7 @@
 {
 	public interface IFUIFactory
 	{
-		FUI Create(string type);
+		ETTask<FUI> Create(string type);
 		void Remove(string type);
 	}
 }
