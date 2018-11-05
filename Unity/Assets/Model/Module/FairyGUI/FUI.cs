@@ -6,20 +6,17 @@ using FairyGUI;
 namespace ETModel
 {
 	[ObjectSystem]
-	public class FUIAwakeSystem : AwakeSystem<FUI, string, GObject>
+	public class FUIAwakeSystem : AwakeSystem<FUI, GObject>
 	{
-		public override void Awake(FUI self, string type, GObject gObject)
+		public override void Awake(FUI self, GObject gObject)
 		{
 			self.GObject = gObject;
-			self.Type = type;
 		}
 	}
 	
 	public sealed class FUI: Entity
 	{
 		public GObject GObject;
-
-		public string Type;
 		
 		public Dictionary<string, FUI> children = new Dictionary<string, FUI>();
 
@@ -76,6 +73,10 @@ namespace ETModel
 
 		public void Remove(string name)
 		{
+			if (this.IsDisposed)
+			{
+				return;
+			}
 			FUI ui;
 			if (!this.children.TryGetValue(name, out ui))
 			{

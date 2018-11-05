@@ -13,8 +13,10 @@ namespace ETHotfix
 		public async ETVoid RunAsync()
 		{
 			FUIComponent fuiComponent = Game.Scene.GetComponent<FUIComponent>();
+			
 			// 使用工厂创建一个Lobby UI
-			await fuiComponent.Create(FUIType.Lobby);
+			FUI ui = await FUILobbyFactory.Create();
+			fuiComponent.Add(ui);
 			
 			// 创建Lobby UI完成 
 			Game.EventSystem.Run(EventIdType.CreateLobbyUIFinish);

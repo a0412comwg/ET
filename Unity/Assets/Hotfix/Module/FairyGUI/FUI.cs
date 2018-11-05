@@ -144,33 +144,5 @@ namespace ETHotfix
 				this.GObject.visible = value;
 			}
 		}
-
-		public void Show()
-		{
-			if (this.GObject.visible)
-			{
-				return;
-			}
-			this.GObject.visible = true;
-
-			if (this.GObject is GWindow gWindow)
-			{
-				gWindow.Show();
-			}
-		}
-
-		public void Hide()
-		{
-			if (!this.GObject.visible)
-			{
-				return;
-			}
-			this.GObject.visible = true;
-
-			if (this.GObject is GWindow gWindow)
-			{
-				gWindow.Hide();
-			}
-		}
 	}
 }

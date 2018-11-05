@@ -8,6 +8,9 @@ namespace ETHotfix
 		public override void Run()
 		{
 			Game.Scene.GetComponent<FUIComponent>().Remove(FUIType.Login);
+			
+			// 卸载包
+			FUILoginFactory.Remove();
 		}
 	}
 }

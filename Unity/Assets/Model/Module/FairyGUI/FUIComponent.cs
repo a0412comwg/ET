@@ -20,7 +20,7 @@ namespace ETModel
 	{
 		private readonly Dictionary<string, IFUIFactory> uiTypes = new Dictionary<string, IFUIFactory>();
 
-		private FUI Root;
+		public FUI Root;
 
 		public override void Dispose()
 		{
@@ -38,7 +38,7 @@ namespace ETModel
 
 		public void Awake()
 		{
-			this.Root = ComponentFactory.Create<FUI, string, GObject>("Root", GRoot.inst);
+			this.Root = ComponentFactory.Create<FUI, GObject>(GRoot.inst);
 			
 			this.uiTypes.Clear();
             
@@ -55,7 +55,7 @@ namespace ETModel
 				FUIFactoryAttribute attribute = attrs[0] as FUIFactoryAttribute;
 				if (this.uiTypes.ContainsKey(attribute.Type))
 				{
-					Log.Debug($"已经存在同类FUI Factory: {attribute.Type}");
+                    Log.Debug($"已经存在同类FUI Factory: {attribute.Type}");
 					throw new Exception($"已经存在同类FUI Factory: {attribute.Type}");
 				}
 				object o = Activator.CreateInstance(type);
@@ -69,16 +69,43 @@ namespace ETModel
 			}
 		}
 
-		public async ETTask<FUI> Create(string type)
+		public async ETTask<FUI> Create(string name)
 		{
 			try
 			{
-				FUI ui = await this.uiTypes[type].Create();
+				FUI ui = await this.uiTypes[name].Create();
+				this.Root.Add(ui);
 				return ui;
 			}
 			catch (Exception e)
 			{
-				throw new Exception($"{type} UI 错误: {e}");
+				throw new Exception($"{name} UI Create 错误: {e}");
+			}
+		}
+		
+		public void Remove(string name)
+		{
+			try
+			{
+				this.Root.Remove(name);
+				this.uiTypes[name].Remove();
+			}
+			catch (Exception e)
+			{
+				throw new Exception($"{name} UI Remove 错误: {e}");
+			}
+		}
+		
+		public FUI Get(string name)
+		{
+			try
+			{
+				FUI ui = this.Root.Get(name);
+				return ui;
+			}
+			catch (Exception e)
+			{
+				throw new Exception($"{name} UI Get 错误: {e}");
 			}
 		}
 	}

@@ -14,7 +14,8 @@ namespace ETHotfix
 		{
 			FUIComponent fuiComponent = Game.Scene.GetComponent<FUIComponent>();
 			// 使用工厂创建一个Login UI
-			await fuiComponent.Create(FUIType.Login);
+			FUI ui = await FUILoginFactory.Create();
+			fuiComponent.Add(ui);
 		}
 	}
 }

@@ -3,13 +3,9 @@ using FairyGUI;
 
 namespace ETHotfix
 {
-	/// <summary>
-	/// 工厂，每种UI做一个工厂方法，在这里创建FUI
-	/// </summary>
-    [FUIFactory(FUIType.Lobby)]
-    public class FUILobbyFactory : IFUIFactory
+    public static class FUILobbyFactory
     {
-        public async ETTask<FUI> Create()
+        public static async ETTask<FUI> Create()
         {
 	        await ETTask.CompletedTask;
 	        
@@ -26,7 +22,7 @@ namespace ETHotfix
 	        return fui;
         }
 
-	    public void Remove()
+	    public static void Remove()
 	    {
 		    ETModel.Game.Scene.GetComponent<FUIPackageComponent>().RemovePackage(FUIType.Lobby);
 	    }
