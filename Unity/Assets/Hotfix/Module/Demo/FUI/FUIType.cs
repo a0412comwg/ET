@@ -4,5 +4,6 @@
     {
 	    public const string Loading = "Loading";
 	    public const string Login = "Login";
+	    public const string Lobby = "Lobby";
 	}
 }

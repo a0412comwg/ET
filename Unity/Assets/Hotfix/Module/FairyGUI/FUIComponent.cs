@@ -39,7 +39,7 @@ namespace ETHotfix
 
 		public void Awake()
 		{
-			this.Root = ComponentFactory.Create<FUI, string, GObject>("Root", GRoot.inst);
+			this.Root = ComponentFactory.Create<FUI, GObject>(GRoot.inst);
 			
 			this.uiTypes.Clear();
             
@@ -70,16 +70,43 @@ namespace ETHotfix
 			}
 		}
 
-		public async ETTask<FUI> Create(string type)
+		public async ETTask<FUI> Create(string name)
 		{
 			try
 			{
-				FUI ui = await this.uiTypes[type].Create();
+				FUI ui = await this.uiTypes[name].Create();
+				this.Root.Add(ui);
 				return ui;
 			}
 			catch (Exception e)
 			{
-				throw new Exception($"{type} UI 错误: {e}");
+				throw new Exception($"{name} UI Create 错误: {e}");
+			}
+		}
+		
+		public void Remove(string name)
+		{
+			try
+			{
+				this.Root.Remove(name);
+				this.uiTypes[name].Remove();
+			}
+			catch (Exception e)
+			{
+				throw new Exception($"{name} UI Remove 错误: {e}");
+			}
+		}
+		
+		public FUI Get(string name)
+		{
+			try
+			{
+				FUI ui = this.Root.Get(name);
+				return ui;
+			}
+			catch (Exception e)
+			{
+				throw new Exception($"{name} UI Get 错误: {e}");
 			}
 		}
 	}

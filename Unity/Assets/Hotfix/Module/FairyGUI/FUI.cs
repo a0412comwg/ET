@@ -7,20 +7,17 @@ using FairyGUI;
 namespace ETHotfix
 {
 	[ObjectSystem]
-	public class FUIAwakeSystem : AwakeSystem<FUI, string, GObject>
+	public class FUIAwakeSystem : AwakeSystem<FUI, GObject>
 	{
-		public override void Awake(FUI self, string type, GObject gObject)
+		public override void Awake(FUI self, GObject gObject)
 		{
 			self.GObject = gObject;
-			self.Type = type;
 		}
 	}
 	
 	public sealed class FUI: Entity
 	{
 		public GObject GObject;
-
-		public string Type;
 		
 		public Dictionary<string, FUI> children = new Dictionary<string, FUI>();
 
@@ -29,6 +26,10 @@ namespace ETHotfix
 			get
 			{
 				return this.GObject.name;
+			}
+			set
+			{
+				this.GObject.name = value;
 			}
 		}
 
@@ -77,6 +78,10 @@ namespace ETHotfix
 
 		public void Remove(string name)
 		{
+			if (this.IsDisposed)
+			{
+				return;
+			}
 			FUI ui;
 			if (!this.children.TryGetValue(name, out ui))
 			{
@@ -121,8 +126,8 @@ namespace ETHotfix
 				throw new Exception($"this ui is not GComponent, so has not child, {this.Name}");
 			}
 
-			GComponent childComponent = gComponent.GetChild(name).asCom;
-			child = ComponentFactory.Create<FUI, GComponent>(childComponent);
+			GObject gObject = gComponent.GetChild(name);
+			child = ComponentFactory.Create<FUI, GObject>(gObject);
 			this.Add(child);
 			
 			return child;

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <graph id="n1_rg0p" name="n1" xy="0,0" size="1280,720" type="rect" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n0_rg0p" name="EnterMapBtn" src="rg0p1" fileName="EnterMapBtn.xml" xy="550,297" size="134,41">
+      <Button title="进入地图"/>
+    </component>
+  </displayList>
+</component>
