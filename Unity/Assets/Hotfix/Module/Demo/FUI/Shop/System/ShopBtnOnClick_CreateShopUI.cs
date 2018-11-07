@@ -12,8 +12,7 @@ namespace ETHotfix
 
 		public async ETVoid RunAsync()
 		{
-			// 使用工厂创建一个Shop UI
-			FUI ui = await FUIShopFactory.Create();
+			await FUIShopFactory.Create();
 		}
 	}
 }

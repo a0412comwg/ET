@@ -8,7 +8,7 @@ namespace ETHotfix
 		public override void Run()
 		{
 			Game.Scene.GetComponent<FUIComponent>().Remove(FUIType.Lobby);
-			FUILobbyFactory.Remove();
+			ETModel.Game.Scene.GetComponent<FUIPackageComponent>().RemovePackage(FUIType.Lobby);
 		}
 	}
 }

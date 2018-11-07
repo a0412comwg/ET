@@ -10,7 +10,7 @@ namespace ETHotfix
 			Game.Scene.GetComponent<FUIComponent>().Remove(FUIType.Login);
 			
 			// 卸载包
-			FUILoginFactory.Remove();
+			ETModel.Game.Scene.GetComponent<FUIPackageComponent>().RemovePackage(FUIType.Login);
 		}
 	}
 }

@@ -21,10 +21,5 @@ namespace ETHotfix
 	        
 	        return fui;
         }
-
-	    public static void Remove()
-	    {
-		    ETModel.Game.Scene.GetComponent<FUIPackageComponent>().RemovePackage(FUIType.Lobby);
-	    }
     }
 }

@@ -16,7 +16,7 @@ namespace ETHotfix
 
         public static void LoginBtnOnClick(FUILoginComponent self)
         {
-            LogicHelper.Login(self.AccountInput.GObject.asTextInput.text).NoAwait();
+            LogicHelper.Login(self.AccountInput.Get("Input").GObject.asTextInput.text).NoAwait();
         }
     }
 }

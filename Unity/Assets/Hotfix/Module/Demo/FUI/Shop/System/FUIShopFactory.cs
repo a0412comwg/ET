@@ -15,20 +15,16 @@ namespace ETHotfix
 	        
 	        FUI fui = ComponentFactory.Create<FUI, GObject>(UIPackage.CreateObject(FUIType.Shop, FUIType.Shop));
 	        fui.Name = FUIType.Shop;
-	        // 这里可以根据UI逻辑的复杂度关联性，拆分成多个小组件来写逻辑,这里逻辑比较简单就只使用一个组件了
-	        fui.AddComponent<FUIShopComponent>();
 	        
 	        // 挂上窗口组件就成了窗口
 	        FUIWindowComponent fWindow = fui.AddComponent<FUIWindowComponent>();
 	        fWindow.Modal = true;
 	        fWindow.Show();
 	        
+	        // 这里可以根据UI逻辑的复杂度关联性，拆分成多个小组件来写逻辑,这里逻辑比较简单就只使用一个组件了
+	        fui.AddComponent<FUIShopComponent>();
+	        
 	        return fui;
         }
-
-	    public static void Remove()
-	    {
-		    ETModel.Game.Scene.GetComponent<FUIPackageComponent>().RemovePackage(FUIType.Shop);
-	    }
     }
 }

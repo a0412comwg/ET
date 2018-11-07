@@ -52,6 +52,7 @@ namespace ETModel
 		{
 			this.packages.TryGetValue(type, out UIPackage package);
 			UIPackage.RemovePackage(package.name);
+			this.packages.Remove(package.name);
 #if !UNITY_EDITOR
 			ETModel.Game.Scene.GetComponent<ResourcesComponent>().UnloadBundle(type.StringToAB());
 #endif
