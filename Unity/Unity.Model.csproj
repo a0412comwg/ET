@@ -291,12 +291,10 @@
     <Compile Include="Assets\Model\Module\Demo\UnitPathComponent.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\FUI.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\FUIComponent.cs" />
-    <Compile Include="Assets\Model\Module\FairyGUI\FUIFactoryAttribute.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\FUIHelper.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\FUIPackageComponent.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\FUIStackComponent.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\GWindow.cs" />
-    <Compile Include="Assets\Model\Module\FairyGUI\IFUIFactory.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Core\BlendMode.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Core\CaptureCamera.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Core\Container.cs" />

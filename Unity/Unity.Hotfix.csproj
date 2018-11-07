@@ -114,7 +114,6 @@
     <Compile Include="Assets\Hotfix\Module\FairyGUI\FUIComponent.cs" />
     <Compile Include="Assets\Hotfix\Module\FairyGUI\FUIStackComponent.cs" />
     <Compile Include="Assets\Hotfix\Module\FairyGUI\FUIWindowComponent.cs" />
-    <Compile Include="Assets\Hotfix\Module\FairyGUI\IFUIFactory.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\AMHandler.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\HotfixMessage.cs" />
     <Compile Include="Assets\Hotfix\Module\Message\HotfixMessageDispatcher.cs" />
