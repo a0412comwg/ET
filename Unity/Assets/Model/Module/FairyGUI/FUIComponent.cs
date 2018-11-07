@@ -7,6 +7,7 @@ namespace ETModel
 	{
 		public override void Awake(FUIComponent self)
 		{
+			GRoot.inst.SetContentScaleFactor(1280, 720, UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
 			self.Root = ComponentFactory.Create<FUI, GObject>(GRoot.inst);
 		}
 	}

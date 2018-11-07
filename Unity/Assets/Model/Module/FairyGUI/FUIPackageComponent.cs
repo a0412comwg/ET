@@ -38,7 +38,7 @@ namespace ETModel
             
 			UIPackage uiPackage = UIPackage.AddPackage($"{FUI_PACKAGE_DIR}/{type}");
 #else
-            string uiBundleName = fuiType.StringToAB();
+            string uiBundleName = type.StringToAB();
             ResourcesComponent resourcesComponent = Game.Scene.GetComponent<ResourcesComponent>();
             await resourcesComponent.LoadBundleAsync(uiBundleName);
 	        

@@ -10,6 +10,7 @@
     </component>
     <component id="n7_w4q2" name="AccountInput" src="w4q24" fileName="Input.xml" xy="511,278" size="192,42">
       <relation target="" sidePair="center-center,middle-middle"/>
+      <relation target="" sidePair="width-width,height-height"/>
     </component>
   </displayList>
 </component>

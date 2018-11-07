@@ -338,13 +338,6 @@
     <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Core\Text\TouchScreenKeyboard.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Core\Text\TypingEffect.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Core\UpdateContext.cs" />
-    <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Editor\EditorToolSet.cs" />
-    <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Editor\PackagesWindow.cs" />
-    <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Editor\StageCameraEditor.cs" />
-    <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Editor\UIConfigEditor.cs" />
-    <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Editor\UIContentScalerEditor.cs" />
-    <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Editor\UIPainterEditor.cs" />
-    <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Editor\UIPanelEditor.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Event\EventBridge.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Event\EventContext.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\Scripts\Event\EventDispatcher.cs" />

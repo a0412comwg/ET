@@ -8,6 +8,7 @@
       <Button title="进入地图"/>
     </component>
     <component id="n4_rg0p" name="ShopBtn" src="rg0p1" fileName="Button.xml" xy="256,326" size="134,41">
+      <relation target="" sidePair="width-width,height-height"/>
       <Button title="商店"/>
     </component>
     <component id="n5_rg0p" name="RankBtn" src="rg0p1" fileName="Button.xml" xy="856,320" size="134,41">
