@@ -295,6 +295,7 @@
     <Compile Include="Assets\Model\Module\FairyGUI\FUIHelper.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\FUIPackageComponent.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\FUIStackComponent.cs" />
+    <Compile Include="Assets\Model\Module\FairyGUI\FUIWindowComponent.cs" />
     <Compile Include="Assets\Model\Module\FairyGUI\GWindow.cs" />
     <Compile Include="Assets\Model\Module\Filter\FilterAttribute.cs" />
     <Compile Include="Assets\Model\Module\Filter\FilterComponent.cs" />
